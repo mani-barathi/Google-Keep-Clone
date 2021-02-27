@@ -1,0 +1,8 @@
+input,button,textarea{
+  outline: none;
+  border: none;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgb(56, 56, 56);
+}
