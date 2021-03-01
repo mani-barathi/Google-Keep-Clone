@@ -5,20 +5,20 @@ const client = new faunadb.Client({
     secret: process.env.FAUNA_SECRET_KEY
 })
 
-exports.handler = async (event, context, cb) => {
+exports.handler = async (event) => {
     try {
-        const response = await client.query(
-            q.Get(q.Ref(q.Collection('notes'), '291611980704252417'))
+        const { data } = await client.query(
+            q.Map(q.Paginate(q.Match(q.Index('get_notes_desc')), { size: 1000 }),
+                q.Lambda(["ts", "ref"], q.Get(q.Var('ref')))
+            )
         )
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: "getNotes", data: response.data })
-        }
+        data.forEach(doc => {
+            doc.id = doc.ref.id
+            delete doc.ref
+        })
+        return { statusCode: 200, body: JSON.stringify({ data, report: true }) }
     } catch (error) {
         console.log(error)
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ message: "Somthing went Wrong" })
-        }
+        return { statusCode: 500, body: JSON.stringify({ message: "Somthing went Wrong", report: false }) }
     }
 }

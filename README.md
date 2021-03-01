@@ -2,7 +2,8 @@
 Developing a Google Keep Clone using React🚀, FaunaDb✨ and Netlify’s Serverless Functions🤩
 
 ### Currently Working 👇
-- [ ] Serverless functions
+- [ ] Adding Note from Frontend
+- [X] Serverless functions
 - [x] NoteForm
 - [x] ~Logo~
 

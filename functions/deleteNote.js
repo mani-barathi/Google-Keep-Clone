@@ -14,7 +14,7 @@ exports.handler = async (event) => {
 
     try {
         const response = await client.query(q.Delete(q.Ref(q.Collection('notes'), id)))
-        return { statusCode: 200, body: JSON.stringify({ message: "Note Deleted", report: true }) }
+        return { statusCode: 200, body: JSON.stringify({ id: response.ref.id, report: true }) }
     } catch (error) {
         console.log(error)
         return { statusCode: 500, body: JSON.stringify({ message: "Somthing went Wrong", report: false }) }

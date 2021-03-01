@@ -15,11 +15,8 @@ exports.handler = async (event) => {
     if (title) updateData.title = title
     if (text) updateData.text = text
 
-    console.log(updateData)
-
     try {
         const { data, ref, ts } = await client.query(q.Update(q.Ref(q.Collection('notes'), id), { data: updateData }))
-        console.log(data)
         return {
             statusCode: 200,
             body: JSON.stringify({ id: ref.id, ts, data, report: true })
