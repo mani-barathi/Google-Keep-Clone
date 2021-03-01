@@ -8,7 +8,7 @@ const client = new faunadb.Client({
 exports.handler = async (event) => {
     try {
         const { data } = await client.query(
-            q.Map(q.Paginate(q.Match(q.Index('get_notes_desc')), { size: 1000 }),
+            q.Map(q.Paginate(q.Match(q.Index('note_sort_by_ts_desc')), { size: 1000 }),
                 q.Lambda(["ts", "ref"], q.Get(q.Var('ref')))
             )
         )

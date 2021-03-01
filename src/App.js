@@ -1,5 +1,6 @@
 import './App.css'
 import CreateNoteForm from "./components/CreateNoteForm"
+import NotesGrid from "./components/NotesGrid"
 import Logos from "./components/Logos"
 
 import styled from "styled-components"
@@ -13,6 +14,8 @@ function App() {
 
       <CreateNoteForm />
 
+      <NotesGrid />
+
     </Wrapper>
   )
 }
@@ -20,7 +23,7 @@ function App() {
 const Wrapper = styled.div`
   width:100%;
   min-height:100vh;
-  background-color:whitesmoke;
+  background-color:#F5F5F5;
   display:flex;
   flex-direction:column;
   align-items:center;

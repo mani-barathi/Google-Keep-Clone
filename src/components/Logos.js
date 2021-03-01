@@ -8,7 +8,7 @@ function Logos() {
             <Logo src="https://www.google.com/images/icons/product/keep-512.png" alt="Keep logo" draggable="false" />
 
             <Row>
-                <Logo small src="https://img.favpng.com/4/1/17/react-javascript-vue-js-logo-png-favpng-T97hHj5T2UsnURsbZ0PB5Mi3c.jpg" draggable="false" title="React" />
+                <Logo small src="https://cdn.auth0.com/blog/react-js/react.png" draggable="false" title="React" />
                 <Plus />
                 <Logo small src="https://manzinello.dev/assets/images/faunadb.png" draggable="false" title="Fauna Db" />
                 <Plus />
