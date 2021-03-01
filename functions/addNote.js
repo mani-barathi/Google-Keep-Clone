@@ -8,19 +8,19 @@ const client = new faunadb.Client({
 
 exports.handler = async (event, context, cb) => {
     if (event.httpMethod != 'POST')
-        return { statusCode: 401, body: JSON.stringify({ message: "Un Authorized request! " }) }
+        return { statusCode: 401, body: JSON.stringify({ message: "Un Authorized request! ", report: false }) }
 
     const { title, text } = JSON.parse(event.body)
     console.log({ title, text })
 
     try {
         const { data, ref, ts } = await client.query(q.Create(q.Collection('notes'), { data: { title, text } }))
-        console.log(ref.id)
+        const newNote = { id: ref.id, data, ts }
         return {
             statusCode: 200,
-            body: JSON.stringify({ id: ref.id, ts, data })
+            body: JSON.stringify({ data: newNote, report: true })
         }
     } catch (error) {
-        return { statusCode: 500, body: JSON.stringify({ message: "Somthing went Wrong" }) }
+        return { statusCode: 500, body: JSON.stringify({ message: "Somthing went Wrong", report: false }) }
     }
 }
