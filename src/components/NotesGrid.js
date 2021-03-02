@@ -5,12 +5,19 @@ import { useStateValue } from '../StateContext'
 
 function NotesGrid() {
     const [notes, setNotes] = useState([])
-    const [{ newNote, updateNote, deltedNoteId }] = useStateValue()
+    const [{ newNote, deletedNoteId }] = useStateValue()
 
+    // adding newly created Note to the top the notes
     useEffect(() => {
         if (newNote)
             setNotes(prev => [newNote, ...prev])
     }, [newNote])
+
+    // removing the deleted note based on the id
+    useEffect(() => {
+        if (deletedNoteId)
+            setNotes(prev => prev.filter(note => note.id !== deletedNoteId))
+    }, [deletedNoteId])
 
     useEffect(() => {
         const getNotes = async () => {
@@ -31,7 +38,7 @@ function NotesGrid() {
 
     return (
         <Grid>
-            { notes.map(note => <Note key={note.id} data={note.data} />)}
+            { notes.map(note => <Note key={note.id} id={note.id} data={note.data} />)}
         </Grid>
     )
 }

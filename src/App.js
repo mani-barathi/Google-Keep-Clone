@@ -1,7 +1,8 @@
 import './App.css'
-import CreateNoteForm from "./components/CreateNoteForm"
-import NotesGrid from "./components/NotesGrid"
 import Logos from "./components/Logos"
+import CreateNoteForm from "./components/CreateNoteForm"
+import EditNoteForm from "./components/EditNoteForm"
+import NotesGrid from "./components/NotesGrid"
 
 import styled from "styled-components"
 
@@ -13,6 +14,8 @@ function App() {
       <Logos />
 
       <CreateNoteForm />
+
+      <EditNoteForm />
 
       <NotesGrid />
 

@@ -1,9 +1,16 @@
 import React from 'react'
 import styled from "styled-components"
+import { useStateValue } from "../StateContext"
 
-function Note({ data }) {
+function Note({ id, data }) {
+    const [, dispatch] = useStateValue()
+
+    const openNote = () => {
+        dispatch({ type: 'SET_EDITING_NOTE', payload: { id, data } })
+    }
+
     return (
-        <Wrapper>
+        <Wrapper onClick={openNote} >
             <Title>{data.title}</Title>
             <Text>{data.text}</Text>
         </Wrapper>

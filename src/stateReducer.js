@@ -2,6 +2,7 @@ export const initialState = {
     newNote: null,
     upatedNote: null,
     deletedNoteId: null,
+    editingNote: null
 }
 
 export const reducer = (state, action) => {
@@ -23,6 +24,12 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 deletedNoteId: action.payload
+            }
+
+        case 'SET_EDITING_NOTE':
+            return {
+                ...state,
+                editingNote: action.payload
             }
 
         default:
