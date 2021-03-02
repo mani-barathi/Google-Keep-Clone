@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Note from "./Note"
 import styled from "styled-components"
+import { useStateValue } from '../StateContext'
 
 function NotesGrid() {
     const [notes, setNotes] = useState([])
+    const [{ newNote, updateNote, deltedNoteId }] = useStateValue()
+
+    useEffect(() => {
+        if (newNote)
+            setNotes(prev => [newNote, ...prev])
+    }, [newNote])
 
     useEffect(() => {
         const getNotes = async () => {
@@ -24,7 +31,7 @@ function NotesGrid() {
 
     return (
         <Grid>
-            { notes.map(note => <Note key={note.is} data={note.data} />)}
+            { notes.map(note => <Note key={note.id} data={note.data} />)}
         </Grid>
     )
 }

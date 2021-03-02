@@ -1,8 +1,10 @@
 import { useState, useRef } from "react"
 import styled from "styled-components"
 import { Button, Form, FormWrapper, Modal, Input, TextArea } from "./utils"
+import { useStateValue } from "../StateContext"
 
 function CreateNoteForm() {
+    const [, dispatch] = useStateValue()
     const [showForm, setShowForm] = useState(false)
     const [loading, setLoading] = useState(false)
     const modalRef = useRef()
@@ -25,7 +27,7 @@ function CreateNoteForm() {
             const { data, report } = await response.json()
 
             if (report) {
-                console.log(data)
+                dispatch({ type: 'SET_NEW_NOTE', payload: data })
                 formRef.current.reset()
                 closeForm()
             }
