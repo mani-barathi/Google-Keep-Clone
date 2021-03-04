@@ -17,9 +17,10 @@ exports.handler = async (event) => {
 
     try {
         const { data, ref, ts } = await client.query(q.Update(q.Ref(q.Collection('notes'), id), { data: updateData }))
+        const updatedNote = { id: ref.id, data, ts }
         return {
             statusCode: 200,
-            body: JSON.stringify({ id: ref.id, ts, data, report: true })
+            body: JSON.stringify({ data: updatedNote, report: true })
         }
     } catch (error) {
         console.log(error)

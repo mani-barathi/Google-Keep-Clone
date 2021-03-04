@@ -1,6 +1,6 @@
 export const initialState = {
     newNote: null,
-    upatedNote: null,
+    updatedNote: null,
     deletedNoteId: null,
     editingNote: null
 }
@@ -17,7 +17,7 @@ export const reducer = (state, action) => {
         case 'SET_UPDATED_NOTE':
             return {
                 ...state,
-                upatedNote: action.payload
+                updatedNote: action.payload
             }
 
         case 'SET_DELETED_NOTE_ID':

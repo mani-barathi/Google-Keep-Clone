@@ -5,7 +5,7 @@ import { useStateValue } from '../StateContext'
 
 function NotesGrid() {
     const [notes, setNotes] = useState([])
-    const [{ newNote, deletedNoteId }] = useStateValue()
+    const [{ newNote, deletedNoteId, updatedNote }, dispatch] = useStateValue()
 
     // adding newly created Note to the top the notes
     useEffect(() => {
@@ -18,6 +18,14 @@ function NotesGrid() {
         if (deletedNoteId)
             setNotes(prev => prev.filter(note => note.id !== deletedNoteId))
     }, [deletedNoteId])
+
+    // Update the Note
+    useEffect(() => {
+        if (updatedNote) {
+            setNotes(prev => prev.map(note => (note.id === updatedNote.id) ? updatedNote : note))
+            dispatch({ type: "SET_UPDATED_NOTE", payload: null })
+        }
+    }, [updatedNote, dispatch])
 
     useEffect(() => {
         const getNotes = async () => {
