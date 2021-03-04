@@ -33,10 +33,11 @@ function NotesGrid() {
                 const response = await fetch('/api/getNotes')
                 const { data, report } = await response.json()
 
-                if (report) {
-                    console.log(data)
+                if (report)
                     setNotes(data)
-                }
+                else
+                    alert('Something went wrong! Unable to fetch Notes')
+
             } catch (error) {
                 alert('something went wrong! Try again later')
             }

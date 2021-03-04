@@ -14,12 +14,20 @@ function NoteForm({ }) {
 
     const handleEditNote = async (e) => {
         e.preventDefault()
-        console.log(`Editing Note with Title ${editingNote.data.title}`)
         const title = formRef.current.title.value
         const text = formRef.current.text.value
 
-        const isNoteChanged = (title !== editingNote.data.title) || (text !== editingNote.data.text)
+        const hasTitleChanged = (title !== editingNote.data.title)
+        const hasTextChanged = (text !== editingNote.data.text)
+        const isNoteChanged = hasTitleChanged || hasTextChanged
         const isNoteEmpty = !title.trim() && !text.trim()
+
+        const changedNote = { id: editingNote.id }
+
+        if (hasTitleChanged) changedNote.title = title
+        if (hasTextChanged) changedNote.text = text
+
+        console.log(changedNote)
 
         if (isNoteEmpty)
             return handleDeleteNote()
@@ -29,12 +37,11 @@ function NoteForm({ }) {
             try {
                 const response = await fetch('/api/updateNote', {
                     method: "POST",
-                    body: JSON.stringify({ id: editingNote.id, title, text })
+                    body: JSON.stringify(changedNote)
                 })
                 const { report, data } = await response.json()
                 if (report) {
                     dispatch({ type: "SET_UPDATED_NOTE", payload: data })
-                    dispatch({ type: "SET_EDITING_NOTE", payload: null })
                 } else
                     alert('something went wrong. Try again later!')
             } catch (error) {
@@ -42,12 +49,12 @@ function NoteForm({ }) {
             }
             setLoading(false)
         }
+        dispatch({ type: "SET_EDITING_NOTE", payload: null })
     }
 
     const handleDeleteNote = async () => {
         if (loading) return
         setLoading(true)
-        console.log(`Deleting Note with Title ${editingNote.data.title}`)
 
         try {
             const response = await fetch('/api/deleteNote', {

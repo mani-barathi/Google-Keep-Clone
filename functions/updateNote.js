@@ -10,13 +10,10 @@ exports.handler = async (event) => {
     if (event.httpMethod != 'POST')
         return { statusCode: 401, body: JSON.stringify({ message: "Un Authorized request! ", report: false }) }
 
-    const { id, title, text } = JSON.parse(event.body)
-    const updateData = {}
-    if (title) updateData.title = title
-    if (text) updateData.text = text
+    const { id, ...changedData } = JSON.parse(event.body)
 
     try {
-        const { data, ref, ts } = await client.query(q.Update(q.Ref(q.Collection('notes'), id), { data: updateData }))
+        const { data, ref, ts } = await client.query(q.Update(q.Ref(q.Collection('notes'), id), { data: changedData }))
         const updatedNote = { id: ref.id, data, ts }
         return {
             statusCode: 200,
