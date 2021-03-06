@@ -3,7 +3,7 @@ import { Button, Form, FormWrapper, Modal, Input, TextArea } from "./utils"
 import { useStateValue } from "../StateContext"
 import styled from 'styled-components'
 
-function NoteForm({ }) {
+function NoteForm() {
     const modalRef = useRef()
     const formRef = useRef()
     const [{ editingNote }, dispatch] = useStateValue()
