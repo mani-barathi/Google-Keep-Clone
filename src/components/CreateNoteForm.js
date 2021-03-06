@@ -20,7 +20,7 @@ function CreateNoteForm() {
         }
 
         try {
-            const response = await fetch('/api/addNote', {
+            const response = await fetch('/.netlify/functions/addNote', {
                 method: "POST",
                 body: JSON.stringify(newNote)
             })

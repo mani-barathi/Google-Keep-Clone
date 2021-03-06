@@ -30,7 +30,7 @@ function NotesGrid() {
     useEffect(() => {
         const getNotes = async () => {
             try {
-                const response = await fetch('/api/getNotes')
+                const response = await fetch('/.netlify/functions/getNotes')
                 const { data, report } = await response.json()
 
                 if (report)

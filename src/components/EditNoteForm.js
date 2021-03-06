@@ -35,7 +35,7 @@ function NoteForm() {
         if (isNoteChanged) {
             setLoading(true)
             try {
-                const response = await fetch('/api/updateNote', {
+                const response = await fetch('/.netlify/functions/updateNote', {
                     method: "POST",
                     body: JSON.stringify(changedNote)
                 })
@@ -57,7 +57,7 @@ function NoteForm() {
         setLoading(true)
 
         try {
-            const response = await fetch('/api/deleteNote', {
+            const response = await fetch('/.netlify/functions/deleteNote', {
                 method: "POST",
                 body: JSON.stringify({ id: editingNote.id })
             })
