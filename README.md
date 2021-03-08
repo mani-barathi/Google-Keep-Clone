@@ -1,6 +1,8 @@
 # Google Keep Clone
 Google Keep Clone built with React🚀, FaunaDb✨ and Netlify’s Serverless Functions🤩
 
+**Click [Here](https://clone-gkeep.netlify.app/) to view the Live Demo**
+
 ### Features
 Create, Read, Update and Delete Notes.
 
@@ -18,14 +20,14 @@ Create, Read, Update and Delete Notes.
 ``` env
     FAUNA_SECRET_KEY=YOUR-DATABASE-KEY
 ```
-* Create a new collection called **notes** and add a first document with structure similar to the object shown below
+* From the Fauna Db project dashboard, create a new collection called **notes** and add a first document with structure similar to the object shown below
 ``` javascript
     {
         title:"My Favorite Food items",
         text:"apples 🍎,chocolate 🍫, ice cream 🍦"
     }
 ```
-* Create an Index for retriving all Notes by running the below query in fauna db shell from the project dashboard page
+* Go to the Shell from Fauna Project dashboard and run the below query, that will create an Index with which we can get all notes in descending order of the edited time.
 ``` javascript
     CreateIndex({
         name: "note_sort_by_ts_desc",
