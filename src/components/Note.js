@@ -44,6 +44,7 @@ const Text = styled.p`
     margin-bottom: 0.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space:pre-wrap;
 `
 
 export default Note
